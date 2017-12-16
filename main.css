@@ -1,0 +1,191 @@
+
+
+#clusters,
+#layout
+{
+	margin: 0 auto;
+	width: 70%;
+}
+
+#leftWell,
+#rightWell
+{
+	display: inline-grid;  
+	grid-template-columns: repeat(6, 1fr);
+	padding: 10px;
+	grid-gap: 10px;
+}
+
+/*offset first rows*/
+#leftWell > .key:nth-child(1),
+#leftWell > .key:nth-child(7),
+#leftWell > .key:nth-child(13),
+#leftWell > .key:nth-child(19),
+#rightWell > .key:nth-child(6),
+#rightWell > .key:nth-child(12),
+#rightWell > .key:nth-child(18),
+#rightWell > .key:nth-child(24)
+{
+	position: relative;
+	top: 10;
+}
+
+/*offset second rows*/
+#leftWell > .key:nth-child(2),
+#leftWell > .key:nth-child(8),
+#leftWell > .key:nth-child(14),
+#leftWell > .key:nth-child(20),
+#rightWell > .key:nth-child(5),
+#rightWell > .key:nth-child(11),
+#rightWell > .key:nth-child(17),
+#rightWell > .key:nth-child(23)
+{
+	position: relative;
+	top: 20;
+}
+
+
+.key
+{ 
+	color: #ffffff;
+	border-radius: 9px;
+	background-color: #222222;
+	border: 1px solid rgba(0, 0, 0, 0.8);
+	padding: 5px 0px 10px 0px;
+	font-size: 30px;
+	text-align: center;
+}
+
+
+/*color homekeys*/
+#leftWell > .key:nth-child(14),
+#leftWell > .key:nth-child(15),
+#leftWell > .key:nth-child(16),
+#leftWell > .key:nth-child(17),
+#rightWell > .key:nth-child(14),
+#rightWell > .key:nth-child(15),
+
+#rightWell > .key:nth-child(16),
+#rightWell > .key:nth-child(17)
+{
+	background-color: #2266cc;
+}
+
+/*key clusters are rotated 20degrees*/
+
+
+.backspace
+{
+	grid-area: backspace;
+}
+
+.delete
+{
+	grid-area: delete;
+}
+
+.home
+{
+	grid-area: home;
+}
+
+.end
+{
+	grid-area: end;
+}
+
+.lctrl
+{
+	grid-area: lctrl;
+}
+
+.lalt
+{
+	grid-area: lalt;
+}
+
+
+
+
+
+.ralt
+{
+	grid-area: ralt;
+}
+
+
+.rctrl
+{
+	grid-area: rctrl;
+}
+
+.enter
+{
+	grid-area: enter;
+}
+
+.space
+{
+	grid-area: space;
+}
+
+
+.pgup
+{
+	grid-area: pgup;
+}
+
+.pgdown
+{
+	grid-area: pgdown;
+}
+
+
+.leftCluster
+{
+	font-size: 12px;
+	float: left;
+	width: 25%;
+    transform: rotate(20deg); /* Standard syntax */
+
+	display: grid;
+	grid-gap: 10px;
+	grid-template-columns: 50px  50px  50px;
+	grid-template-areas:
+		". lctrl lalt"
+		"backspace delete home"
+		"backspace delete end";
+}
+
+.rightCluster
+{
+	font-size: 12px;
+	float: right;
+	width: 25%;
+    transform: rotate(-20deg); /* Standard syntax */
+
+	display: grid;
+	grid-gap: 10px;
+	grid-template-columns: 50px  50px  50px;
+	grid-template-areas:
+		"ralt rctrl ."
+		"pgup enter space"
+		"pgdown enter space";
+}
+
+
+
+.active
+{
+	content: '_';
+	background-color: #ff0000;
+}
+
+
+.key:hover
+{
+	background-color: #333333;
+}
+
+
+

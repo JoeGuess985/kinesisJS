@@ -1,0 +1,35 @@
+
+
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="main.css"/>
+	</head>
+	<body bgcolor = "#383838">
+		
+		<div id="layout">
+			<div id="navbar">
+				<select id="layoutSelect" onchange="drawKeys(this.value)">
+					<option value='ly_qwerty'>qwerty</option>
+					<option value='ly_dvorak'>dvorak</option>
+					<option value='ly_colemak'>colemak</option>
+					<option value='ly_workmans'>workmans</option>
+				</select>
+
+				<button type="button" onclick="saveLayout()">&#128190;</button> 
+			</div>
+		
+			<br>
+			<br>
+			<br>
+			<div id="kinesis"></div>
+
+			<div id="clusters"></div>
+		</div>
+		<script type="text/javascript" src="data.js"></script> 
+		<script type="text/javascript" src="drawKey.js"></script> 
+
+		
+		<a href='' id='dl' style='display: none;' target='blank' download='c_qwerty.txt'>download</a>
+
+	</body>
+</html>
