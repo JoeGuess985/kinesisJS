@@ -1,6 +1,4 @@
 
-
-
 function remapKey(event)
 {
 	if(activeKey == null)
@@ -42,11 +40,10 @@ function setClickHandler()
 )};
 
 
-var g_op='';
 
 function writeLayoutSection(section)
 {
-	g_op += '\n\n\n\n* ' + section + ' \n***********\n';
+	out = '\n\n\n\n* ' + section + ' \n***********\n';
 	var keys = document.getElementById(section).getElementsByClassName("key");
 
 	var layout_key = '';
@@ -60,81 +57,70 @@ function writeLayoutSection(section)
 		if(layout_key == user_key)
 			continue;
 
-		g_op += '\n' + '[' + layout_key + ']>[' + user_key + ']';
+		out += '\n' + '[' + layout_key + ']>[' + user_key + ']';
 	}
+	return out;
 }
 
 
 //todo: wrap this up in a functioan
 function saveLayout()
 {
-	g_op='';
+	out = '';
 
-	writeLayoutSection('leftWell');
-	writeLayoutSection('rightWell');
-	writeLayoutSection('clusters');
+	out += writeLayoutSection('leftWell');
+	out += writeLayoutSection('rightWell');
+	out += writeLayoutSection('clusters');
 
-	console.log(g_op);
+	console.log(out);
 	//prompt for download here
 
 	var selectedLayout = document.getElementById('layoutSelect').value;
 
 	var dlLink = document.getElementById('dl');
-	dlLink.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(g_op);
+	dlLink.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(out);
 	dlLink.download = selectedLayout.replace('ly_', 'c_') + '.txt';
 	dlLink.click();
 }
 
+
+function drawGroup(group)
+{
+	var layout = document.getElementById('layoutSelect').value;
+	var out = '<div id="'+ group + '">';
+
+	for(var row = 0; row < layouts[layout][group].length; row++)
+	{
+		for(var idx = 0; idx < layouts[layout][group][row].length; idx++)
+		{
+			var qwt = layouts['ly_qwerty'][group][row][idx];
+			var dvk = layouts['ly_dvorak'][group][row][idx];
+			var selected = layouts[layout][group][row][idx];
+		
+			out += '<div class="key" qwerty = "' + qwt + '" dvorak = "' + dvk + '">' + selected + '</div>';
+		}
+	}
+
+	out += '</div>';
+	
+	return out;
+}
+
+
 function drawKeys(layout)
 {
-	var out = '<div id="leftWell">';
+	var out = '';
+	
+	document.getElementById("kinesis").innerHTML = '';
+	document.getElementById("clusters").innerHTML = '';
 
-	for(var keys of window[layout + '_left'])
+	for(var group of Object.keys(layouts[layout]))
 	{
-		for(var key of keys)
-		{
-			out += '<div class="key" key = "' + key + '">' + key + '</div>';
-		}
+		if(group.includes('Well'))
+			document.getElementById("kinesis").innerHTML += drawGroup(group);
+		else
+			document.getElementById("clusters").innerHTML += drawGroup(group);
 	}
-
-	out += '</div>';
-
-	out += '<div id="rightWell">';
-
-	for(var keys of window[layout + '_right'])
-	{
-		for(var key of keys)
-		{
-			out += '<div class="key" key = "' + key + '">' + key + '</div>';
-		}
-	}
-
-	out += '</div>';
-	document.getElementById("kinesis").innerHTML = out;
-
-
-
-	out = '<div class = "leftCluster">';
-	for(var keys of window['ly_leftCluster'])
-	{
-		for(var key of keys)
-			{
-				out += '<div class="key ' + key + '" key = "' + key + '">' + key + '</div>';
-			}
-	}
-	out += '</div>';
-
-
-	out += '<div class = "rightCluster">';
-	for(var keys of window['ly_rightCluster'])
-	{
-		for(var key of keys)
-			{
-				out += '<div class="key ' + key + '" key = "' + key + '">' + key + '</div>';
-			}
-	}
-	out += '</div>';
-	document.getElementById("clusters").innerHTML = out;
 }
 
 drawKeys('ly_qwerty');

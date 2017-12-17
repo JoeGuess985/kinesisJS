@@ -141,7 +141,7 @@
 }
 
 
-.leftCluster
+#leftThumb
 {
 	font-size: 12px;
 	float: left;
@@ -157,7 +157,7 @@
 		"backspace delete end";
 }
 
-.rightCluster
+#rightThumb
 {
 	font-size: 12px;
 	float: right;
