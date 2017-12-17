@@ -44,6 +44,8 @@ function setClickHandler()
 function writeLayoutSection(section)
 {
 	out = '\n\n\n\n* ' + section + ' \n***********\n';
+	
+	var opLayout = document.querySelector('input[name="outputLayout"]:checked').value
 	var keys = document.getElementById(section).getElementsByClassName("key");
 
 	var layout_key = '';
@@ -51,7 +53,7 @@ function writeLayoutSection(section)
 
 	for(var key of keys)
 	{
-		layout_key = key.getAttribute('key');
+		layout_key = key.getAttribute(opLayout);
 		user_key = key.innerText;
 
 		if(layout_key == user_key)
